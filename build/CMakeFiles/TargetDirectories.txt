@@ -1,0 +1,7 @@
+C:/Users/yufei/source/repos/CSIG/vulkan-guide-starting-point/build/CMakeFiles/Shaders.dir
+C:/Users/yufei/source/repos/CSIG/vulkan-guide-starting-point/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/yufei/source/repos/CSIG/vulkan-guide-starting-point/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/yufei/source/repos/CSIG/vulkan-guide-starting-point/build/third_party/CMakeFiles/vkbootstrap.dir
+C:/Users/yufei/source/repos/CSIG/vulkan-guide-starting-point/build/third_party/CMakeFiles/tinyobjloader.dir
+C:/Users/yufei/source/repos/CSIG/vulkan-guide-starting-point/build/third_party/CMakeFiles/imgui.dir
+C:/Users/yufei/source/repos/CSIG/vulkan-guide-starting-point/build/src/CMakeFiles/vulkan_guide.dir
