@@ -36,7 +36,6 @@ public:
 	VkDevice _device;
 	VkSurfaceKHR _surface;  // Vulkan window surface
 
-	//--- other code ---
 	VkSwapchainKHR _swapchain;
 
 	//image format expected by the windowing system
@@ -48,12 +47,30 @@ public:
 	//array of image-views from the swapchain
 	std::vector<VkImageView> _swapchainImageViews;
 
-	// --- other code ---
+	VkQueue _graphicsQueue;
+	uint32_t _graphicsQueueFamily;
+
+	VkCommandPool _commandPool;
+	VkCommandBuffer _mainCommandBuffer;
+
+	VkRenderPass _renderPass;
+
+	std::vector<VkFramebuffer> _framebuffers;
+
+	VkSemaphore _presentSemaphore, _renderSemaphore;
+	VkFence _renderFence;
 
 private:
 
 	void init_vulkan();
 
-	// --- other code ---
 	void init_swapchain();
+
+	void init_commands();
+
+	void init_default_renderpass();
+	
+	void init_framebuffers();
+
+	void init_sync_structures();
 };
