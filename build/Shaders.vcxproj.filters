@@ -1,8 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <CustomBuild Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\build\CMakeFiles\7eed54023635d01ac6d8e5d3da10772d\triangle.frag.spv.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\build\CMakeFiles\7eed54023635d01ac6d8e5d3da10772d\triangle.vert.spv.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\build\CMakeFiles\18fc7ba8491f0b9bef3078f34de3f398\Shaders.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
     <CustomBuild Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\build\CMakeFiles\Shaders" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{FC720BFA-8C03-3EEF-9C8F-F6ABF75628BA}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -28,6 +28,8 @@ public:
 	//run main loop
 	void run();
 
+
+
 public:
 	//--omitted --
 	VkInstance _instance;
@@ -60,6 +62,8 @@ public:
 	VkSemaphore _presentSemaphore, _renderSemaphore;
 	VkFence _renderFence;
 
+	bool load_shader_module(const char* filePath, VkShaderModule* outShaderModule);
+
 private:
 
 	void init_vulkan();
@@ -73,4 +77,6 @@ private:
 	void init_framebuffers();
 
 	void init_sync_structures();
+
+	void init_pipelines();
 };
