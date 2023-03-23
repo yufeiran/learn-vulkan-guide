@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <CustomBuild Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\build\CMakeFiles\7eed54023635d01ac6d8e5d3da10772d\colored_triangle.frag.spv.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\build\CMakeFiles\7eed54023635d01ac6d8e5d3da10772d\colored_triangle.vert.spv.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
     <CustomBuild Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\build\CMakeFiles\7eed54023635d01ac6d8e5d3da10772d\triangle.frag.spv.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
