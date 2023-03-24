@@ -6,7 +6,31 @@
 #include <vk_types.h>
 #include<vector>
 #include<deque>
+#include<unordered_map>
 #include<functional>
+#include<vk_mem_alloc.h>
+
+#include<vk_mesh.h>
+
+#include<glm/glm.hpp>
+
+struct Material {
+	VkPipeline pipeline;
+	VkPipelineLayout pipelineLayout;
+};
+
+struct RenderObject {
+	Mesh* mesh;
+
+	Material* material;
+
+	glm::mat4 transformMatrix;
+};
+
+struct MeshPushConstants {
+	glm::vec4 data;
+	glm::mat4 render_matrix;
+};
 
 
 class PipelineBuilder {
@@ -20,6 +44,7 @@ public:
 	VkPipelineColorBlendAttachmentState _colorBlendAttachment;
 	VkPipelineMultisampleStateCreateInfo _multisampling;
 	VkPipelineLayout _pipelineLayout;
+	VkPipelineDepthStencilStateCreateInfo _depthStencil;
 
 	VkPipeline build_pipeline(VkDevice device, VkRenderPass pass);
 };
@@ -68,6 +93,20 @@ public:
 
 
 public:
+	//default array of renderable objects
+	std::vector<RenderObject>_renderables;
+
+	std::unordered_map<std::string, Material>_materials;
+	std::unordered_map<std::string, Mesh> _meshes;
+
+	Material* create_material(VkPipeline pipeline, VkPipelineLayout layout, const std::string& name);
+
+	Material* get_material(const std::string& name);
+
+	Mesh* get_mesh(const std::string& name);
+
+	void draw_objects(VkCommandBuffer cmd, RenderObject* first, int count);
+
 	//--omitted --
 	VkInstance _instance;
 	VkDebugUtilsMessengerEXT _debug_messenger;  // Vulkan debug output handle
@@ -86,6 +125,14 @@ public:
 	//array of image-views from the swapchain
 	std::vector<VkImageView> _swapchainImageViews;
 
+	VkImageView _depthImageView;
+	AllocatedImage _depthImage;
+
+	VkFormat _depthFormat;
+
+
+	VmaAllocator  _allocator;
+
 	VkQueue _graphicsQueue;
 	uint32_t _graphicsQueueFamily;
 
@@ -102,6 +149,12 @@ public:
 	VkPipelineLayout _trianglePipelineLayout;
 	VkPipeline _trianglePipeline;
 	VkPipeline _redTrianglePipeline;
+
+	VkPipelineLayout _meshPipelineLayout;
+	VkPipeline _meshPipeline;
+
+	Mesh _triangleMesh;
+	Mesh _monkeyMesh;
 
 	bool load_shader_module(const char* filePath, VkShaderModule* outShaderModule);
 private:
@@ -122,4 +175,10 @@ private:
 	void init_sync_structures();
 
 	void init_pipelines();
+
+	void load_meshes();
+
+	void init_scene();
+
+	void upload_mesh(Mesh& mesh);
 };

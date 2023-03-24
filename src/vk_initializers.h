@@ -29,5 +29,11 @@ namespace vkinit {
 	VkFenceCreateInfo fence_create_info(VkFenceCreateFlags flags = 0);
 
 	VkSemaphoreCreateInfo semaphore_create_info(VkSemaphoreCreateFlags flags = 0);
+
+	VkImageCreateInfo image_create_info(VkFormat format, VkImageUsageFlagBits usageFlags, VkExtent3D extent);
+
+	VkImageViewCreateInfo imageview_create_info(VkFormat format, VkImage image, VkImageAspectFlagBits aspectFlags);
+
+	VkPipelineDepthStencilStateCreateInfo depth_stencil_create_info(bool bDepthTest, bool bDepthWrite, VkCompareOp compareOp);
 }
 

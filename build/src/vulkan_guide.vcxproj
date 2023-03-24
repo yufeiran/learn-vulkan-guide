@@ -335,6 +335,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\src\vk_types.h" />
     <ClCompile Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\src\vk_initializers.cpp" />
     <ClInclude Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\src\vk_initializers.h" />
+    <ClInclude Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\src\vk_mesh.h" />
+    <ClCompile Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\src\vk_mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\yufei\source\repos\CSIG\vulkan-guide-starting-point\build\ZERO_CHECK.proj">
