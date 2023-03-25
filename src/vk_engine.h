@@ -67,6 +67,44 @@ struct DeletionQueue
 	}
 };
 
+struct GPUCameraData {
+	glm::mat4 view;
+	glm::mat4 proj;
+	glm::mat4 viewproj;
+};
+
+struct GPUSceneData {
+	glm::vec4 fogColor;	//w is for exponent
+	glm::vec4 fogDistances; //x for min,y for max,zw unused
+	glm::vec4 ambientColor;
+	glm::vec4 sunlightDirection; //w for sun power
+	glm::vec4 sunlightColor;
+};
+
+struct FrameData {
+	VkSemaphore _presentSemaphore, _renderSemaphore;
+	VkFence _renderFence;
+
+	VkCommandPool _commandPool;
+	VkCommandBuffer _mainCommandBuffer;
+
+	//buffer that holds a single GPUCameraData to use when rendering
+	AllocatedBuffer cameraBuffer;
+
+	VkDescriptorSet globalDescriptor;
+
+	AllocatedBuffer objectBuffer;
+	VkDescriptorSet objectDescriptor;
+};
+
+struct GPUObjectData {
+	glm::mat4 modelMatrix;
+};
+
+//number of frames to overlap when rendering
+constexpr unsigned int FRAME_OVERLAP = 2;
+
+
 class VulkanEngine {
 public:
 
@@ -93,11 +131,7 @@ public:
 
 
 public:
-	//default array of renderable objects
-	std::vector<RenderObject>_renderables;
 
-	std::unordered_map<std::string, Material>_materials;
-	std::unordered_map<std::string, Mesh> _meshes;
 
 	Material* create_material(VkPipeline pipeline, VkPipelineLayout layout, const std::string& name);
 
@@ -107,10 +141,27 @@ public:
 
 	void draw_objects(VkCommandBuffer cmd, RenderObject* first, int count);
 
+	FrameData& get_current_frame();
+
+	//default array of renderable objects
+	std::vector<RenderObject>_renderables;
+
+	std::unordered_map<std::string, Material>_materials;
+	std::unordered_map<std::string, Mesh> _meshes;
+
+	GPUSceneData _sceneParameters;
+	AllocatedBuffer _sceneParameterBuffer;
+
+
+	VkDescriptorSetLayout _globalSetLayout;
+	VkDescriptorSetLayout _objectSetLayout;
+
+	VkDescriptorPool _descriptorPool;
 	//--omitted --
 	VkInstance _instance;
 	VkDebugUtilsMessengerEXT _debug_messenger;  // Vulkan debug output handle
 	VkPhysicalDevice _choseGPU;
+	VkPhysicalDeviceProperties _gpuProperties;
 	VkDevice _device;
 	VkSurfaceKHR _surface;  // Vulkan window surface
 
@@ -125,6 +176,8 @@ public:
 	//array of image-views from the swapchain
 	std::vector<VkImageView> _swapchainImageViews;
 
+	
+
 	VkImageView _depthImageView;
 	AllocatedImage _depthImage;
 
@@ -136,15 +189,12 @@ public:
 	VkQueue _graphicsQueue;
 	uint32_t _graphicsQueueFamily;
 
-	VkCommandPool _commandPool;
-	VkCommandBuffer _mainCommandBuffer;
-
 	VkRenderPass _renderPass;
 
 	std::vector<VkFramebuffer> _framebuffers;
 
-	VkSemaphore _presentSemaphore, _renderSemaphore;
-	VkFence _renderFence;
+	//frame storage
+	FrameData _frames[FRAME_OVERLAP];
 
 	VkPipelineLayout _trianglePipelineLayout;
 	VkPipeline _trianglePipeline;
@@ -181,4 +231,10 @@ private:
 	void init_scene();
 
 	void upload_mesh(Mesh& mesh);
+
+	AllocatedBuffer create_buffer(size_t allocSize, VkBufferUsageFlags usage, VmaMemoryUsage memoryUsage);
+
+	void init_descriptors();
+
+	size_t pad_uniform_buffer_szie(size_t originalSize);
 };
