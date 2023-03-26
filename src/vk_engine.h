@@ -151,6 +151,7 @@ public:
 
 	GPUSceneData _sceneParameters;
 	AllocatedBuffer _sceneParameterBuffer;
+	AllocatedBuffer _cameraAndSceneParameterBuffer;
 
 
 	VkDescriptorSetLayout _globalSetLayout;
